@@ -13,13 +13,8 @@ import jsqlite.Stmt;
 public class GeoDatabaseHandler {
 
     public GeoDatabaseHandler( Context context, StringBuilder sb ) {
-
-
+        
         Database db = new jsqlite.Database();
-
-//        static {
-            System.loadLibrary("jsqlite");
-//        }
 
     }
 
