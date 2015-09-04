@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HelloSpatialite.iml" filepath="$PROJECT_DIR$/HelloSpatialite.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spatialite-android-library/spatialite-android-library.iml" filepath="$PROJECT_DIR$/spatialite-android-library/spatialite-android-library.iml" />
     </modules>
   </component>
 </project>

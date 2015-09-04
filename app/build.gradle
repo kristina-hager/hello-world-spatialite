@@ -1,4 +1,28 @@
+import com.android.build.gradle.tasks.PackageApplication
+
 apply plugin: 'com.android.application'
+
+task copyNativeLibs(type: Copy) {
+    from(new File(project(':spatialite-android-library').projectDir, 'libs')) {
+        include 'armeabi/libjsqlite.so'
+        include 'armeabi-v7a/libjsqlite.so'
+    }
+    into new File(buildDir, 'native-libs')
+}
+tasks.withType(JavaCompile) { compileTask -> compileTask.dependsOn copyNativeLibs }
+clean.dependsOn 'cleanCopyNativeLibs'
+
+tasks.withType(PackageApplication) { pkgTask ->
+    //pkgTask.jniDir new File(buildDir, 'native-libs')
+    pkgTask.jniFolders = new HashSet<File>()
+    pkgTask.jniFolders.add(new File(buildDir, 'native-libs'))
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name.startsWith("lint")) {
+        task.enabled = false
+    }
+}
 
 android {
     compileSdkVersion 21
@@ -22,4 +46,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
+    compile project(':spatialite-android-library')
 }
